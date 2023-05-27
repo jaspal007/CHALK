@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'global_variable.dart';
+import 'dart:ui';
 
 class PopUp extends StatefulWidget {
   const PopUp({super.key});
