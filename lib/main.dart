@@ -38,16 +38,16 @@ class MylistViewApp extends State<listView> {
           height: double.infinity,
           margin: const EdgeInsets.all(20),
           child: Center(
-            child: (items.isNotEmpty)
+            child: (list.isNotEmpty)
                 ? ListView.builder(
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(items[index]),
+                        title: Text(list[index]),
                       );
                     },
-                    itemCount: items.length,
+                    itemCount: listLength(),
                     prototypeItem: ListTile(
-                      title: Text(items.last),
+                      title: Text(list.last),
                     ),
                   )
                 : const Text('Nothing to display here!!!'),

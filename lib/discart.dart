@@ -94,10 +94,10 @@ class _PopUpState extends State<PopUp> {
           onPressed: () {
             setState(() {
               if (text1.text.isNotEmpty) {
-                items.add(text1.text);
+                list.add(text1.text);
               }
             });
-            debugPrint('${items.length}');
+            debugPrint('${list.length}');
             text1.clear();
             debugPrint('Submit button clicked!');
           },
