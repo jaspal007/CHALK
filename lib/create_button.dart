@@ -3,9 +3,9 @@ import 'package:flutter/rendering.dart';
 import 'package:list_view/global_variable.dart';
 
 class CreateButton extends StatefulWidget {
-  TextEditingController controller;
-  BuildContext context;
-  CreateButton({
+  final TextEditingController controller;
+  final BuildContext context;
+  const CreateButton({
     super.key,
     required this.controller,
     required this.context,

@@ -21,7 +21,6 @@ class listView extends StatefulWidget {
 class MylistViewApp extends State<listView> {
   @override
   Widget build(BuildContext context) {
-    final _controller = TextEditingController();
     void setIndex(int idx) {
       setState(() {
         currentIndex = idx;

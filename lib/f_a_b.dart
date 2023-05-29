@@ -2,7 +2,6 @@ import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:list_view/create_button.dart';
-import 'package:list_view/global_variable.dart';
 import 'package:list_view/text_field_input.dart';
 
 class CreateNote extends StatefulWidget {
@@ -28,14 +27,6 @@ class _CreateNoteState extends State<CreateNote> with TickerProviderStateMixin {
           });
         },
       );
-    }
-
-    Widget widget = Icon(Icons.abc);
-
-    void setWidget(Widget wgt) {
-      setState(() {
-        widget = wgt;
-      });
     }
 
     Widget _getClearButton() {

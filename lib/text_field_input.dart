@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TextFieldInput extends StatefulWidget {
-  TextEditingController textEditingController;
-  String labelText;
-  TextFieldInput({
+  final TextEditingController textEditingController;
+  final String labelText;
+  const TextFieldInput({
     super.key,
     required this.textEditingController,
     required this.labelText,
