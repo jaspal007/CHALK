@@ -1,5 +1,9 @@
 import 'package:bottom_sheet/bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:list_view/create_button.dart';
+import 'package:list_view/global_variable.dart';
+import 'package:list_view/text_field_input.dart';
 
 class CreateNote extends StatefulWidget {
   const CreateNote({super.key});
@@ -15,7 +19,6 @@ class _CreateNoteState extends State<CreateNote> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     bool _clearButton = false;
-
     void initState() {
       super.initState();
       title.addListener(
@@ -25,6 +28,14 @@ class _CreateNoteState extends State<CreateNote> with TickerProviderStateMixin {
           });
         },
       );
+    }
+
+    Widget widget = Icon(Icons.abc);
+
+    void setWidget(Widget wgt) {
+      setState(() {
+        widget = wgt;
+      });
     }
 
     Widget _getClearButton() {
@@ -48,14 +59,14 @@ class _CreateNoteState extends State<CreateNote> with TickerProviderStateMixin {
     }
 
     return FloatingActionButton.large(
-      backgroundColor: Colors.blue[50],
+      //backgroundColor: Colors.blue[50],
       elevation: 12,
-      splashColor: Colors.blue,
       onPressed: () {
         showFlexibleBottomSheet(
+          draggableScrollableController: DraggableScrollableController(),
           isSafeArea: true,
-          anchors: [0, 0.38, 0.9],
-          initHeight: 0.38,
+          anchors: [0, 0.4, 0.9],
+          initHeight: 0.4,
           maxHeight: 0.9,
           bottomSheetColor: Colors.transparent,
           decoration: const BoxDecoration(
@@ -69,7 +80,7 @@ class _CreateNoteState extends State<CreateNote> with TickerProviderStateMixin {
           builder: _buildBottomSheet,
         );
       },
-      child: Icon(Icons.create, color: Colors.indigo[900]),
+      child: const Icon(Icons.create),
     );
   }
 }
@@ -123,74 +134,16 @@ Widget _buildBottomSheet(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TextField(
-                        controller: title,
-                        decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            splashRadius: 20,
-                            onPressed: () => title.clear(),
-                            icon: const Icon(Icons.clear_rounded),
-                          ),
-                          labelText: 'Title',
-                          enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(500),
-                            ),
-                            borderSide: BorderSide(
-                              strokeAlign: 1,
-                              color: Colors.blue,
-                              width: 4,
-                              style: BorderStyle.solid,
-                            ),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(500),
-                            ),
-                            borderSide: BorderSide(
-                              strokeAlign: 1,
-                              color: Colors.blue,
-                              width: 4,
-                              style: BorderStyle.solid,
-                            ),
-                          ),
-                        ),
+                      TextFieldInput(
+                        textEditingController: title,
+                        labelText: 'Title',
                       ),
                       Container(
                         height: 20,
                       ),
-                      TextField(
-                        controller: title,
-                        decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            splashRadius: 20,
-                            onPressed: () => title.clear(),
-                            icon: const Icon(Icons.clear_rounded),
-                          ),
-                          labelText: 'Title',
-                          enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(500),
-                            ),
-                            borderSide: BorderSide(
-                              strokeAlign: 1,
-                              color: Colors.blue,
-                              width: 4,
-                              style: BorderStyle.solid,
-                            ),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(500),
-                            ),
-                            borderSide: BorderSide(
-                              strokeAlign: 1,
-                              color: Colors.blue,
-                              width: 4,
-                              style: BorderStyle.solid,
-                            ),
-                          ),
-                        ),
+                      TextFieldInput(
+                        textEditingController: description,
+                        labelText: 'Description',
                       ),
                     ],
                   ),
@@ -297,7 +250,6 @@ Widget _buildBottomSheet(
                     child: const Text(
                       'Cancel',
                       style: TextStyle(
-                        color: Colors.blue,
                         fontSize: 15,
                       ),
                     ),
@@ -305,22 +257,9 @@ Widget _buildBottomSheet(
                   Container(
                     width: 20,
                   ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      minimumSize: const MaterialStatePropertyAll(
-                        Size(100, 50),
-                      ),
-                      shape: MaterialStatePropertyAll(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(500),
-                        ),
-                      ),
-                    ),
-                    onPressed: () => 2 + 3,
-                    child: const Text(
-                      'Create',
-                      style: TextStyle(fontSize: 15),
-                    ),
+                  CreateButton(
+                    controller: title,
+                    context: context,
                   ),
                 ],
               ),
