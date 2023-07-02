@@ -14,19 +14,19 @@ class TextFieldInput extends StatefulWidget {
 }
 
 class _TextFieldInputState extends State<TextFieldInput> {
-    get _controller => widget.textEditingController;
-    get _label => widget.labelText;
-    bool _showClearButton = false;
+  get _controller => widget.textEditingController;
+  get _label => widget.labelText;
+  bool _showClearButton = false;
 
-    @override
-    void initState() {
-      super.initState();
-      _controller.addListener(() {
-        setState(() {
-          _showClearButton = _controller.text.isNotEmpty;
-        });
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() {
+      setState(() {
+        _showClearButton = _controller.text.isNotEmpty;
       });
-    }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class _TextFieldInputState extends State<TextFieldInput> {
       decoration: InputDecoration(
         suffixIcon: _showClearButton
             ? IconButton(
-                icon: Icon(Icons.clear),
+                icon: const Icon(Icons.clear),
                 onPressed: () {
                   setState(() {
                     _controller.clear();
