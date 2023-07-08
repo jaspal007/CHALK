@@ -170,10 +170,7 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        dispose();
-                      },
+                      onPressed: () => Navigator.pop(context),
                       style: const ButtonStyle(
                         minimumSize: MaterialStatePropertyAll(
                           Size(100, 50),
