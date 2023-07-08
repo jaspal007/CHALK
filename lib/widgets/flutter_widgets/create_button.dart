@@ -1,14 +1,18 @@
+//custom 'create' button for the bottom sheet to save the content of the textfields
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:list_view/global_variable.dart';
 
 class CreateButton extends StatefulWidget {
-  final TextEditingController controller;
+  final TextEditingController controller1;
+  final TextEditingController controller2;
   final BuildContext context;
+  final Function(String title) onAddItem;
   const CreateButton({
     super.key,
-    required this.controller,
+    required this.controller1,
+    required this.controller2,
     required this.context,
+    required this.onAddItem,
   });
 
   @override
@@ -16,14 +20,9 @@ class CreateButton extends StatefulWidget {
 }
 
 class _CreateButtonState extends State<CreateButton> {
-  get _controller => widget.controller;
-  get _context => widget.context;
-
-  void listItems(String values) {
-    setState(() {
-      addItem(values);
-    });
-  }
+  TextEditingController get _controller1 => widget.controller1;
+  TextEditingController get _controller2 => widget.controller2;
+  BuildContext get _context => widget.context;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +40,9 @@ class _CreateButtonState extends State<CreateButton> {
         ),
       ),
       onPressed: () {
-        listItems(widget.controller.text);
-        widget.controller.clear();
+        widget.onAddItem(_controller1.text);
+        _controller1.clear();
+        _controller2.clear();
         Navigator.pop(_context);
       },
       child: const Text(

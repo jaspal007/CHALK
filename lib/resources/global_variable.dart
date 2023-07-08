@@ -1,3 +1,5 @@
+//global variable resources for the file
+
 List<String> list = [];
 
 //add item to the list
