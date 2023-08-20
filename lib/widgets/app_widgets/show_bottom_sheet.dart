@@ -56,7 +56,7 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               height: 500,
               child: ListView(
                 controller: widget.scrollController,
@@ -64,8 +64,8 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                 children: [
                   Container(
                     height: 200,
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: EdgeInsets.all(20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
                         color: Colors.white,
@@ -89,8 +89,8 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                   ),
                   Container(
                     height: 200,
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: EdgeInsets.all(20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Colors.white,
@@ -99,8 +99,8 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                   ),
                   Container(
                     height: 200,
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: EdgeInsets.all(20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Colors.white,
@@ -109,8 +109,8 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                   ),
                   Container(
                     height: 200,
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: EdgeInsets.all(20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Colors.white,
@@ -119,8 +119,8 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                   ),
                   Container(
                     height: 200,
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: EdgeInsets.all(20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Colors.white,
@@ -129,8 +129,8 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                   ),
                   Container(
                     height: 200,
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: EdgeInsets.all(20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Colors.white,
@@ -139,8 +139,8 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                   ),
                   Container(
                     height: 200,
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: EdgeInsets.all(20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Colors.white,
@@ -149,8 +149,8 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                   ),
                   Container(
                     height: 200,
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: EdgeInsets.all(20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Colors.white,
