@@ -1,5 +1,6 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:list_view/show_list.dart';
+import 'package:list_view/reminder_list.dart';
 
 void main() {
   runApp(
@@ -15,14 +16,13 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          backgroundColor: Colors.indigo[900],
+          backgroundColor: Colors.blue[50],
+          foregroundColor: Colors.indigo[900],
           centerTitle: true,
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -46,15 +46,31 @@ class MyAppState extends State<MyApp> {
           ),
         ),
         textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            foregroundColor: MaterialStatePropertyAll(
-              Colors.indigo[900],
-            ),
+          style: const ButtonStyle().copyWith(
+            foregroundColor: const MaterialStatePropertyAll(Colors.black),
           ),
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const ShowList(),
+      home: AnimatedSplashScreen(
+        centered: true,
+        splashIconSize: 500,
+        splashTransition: SplashTransition.fadeTransition,
+        curve: Curves.decelerate,
+        splash: Center(
+          child: Text(
+            'CHALK',
+            style: const TextStyle().copyWith(
+              color: Colors.indigo[900],
+              fontSize: 100,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        backgroundColor: Colors.white,
+        animationDuration: const Duration(milliseconds: 500),
+        nextScreen: const ShowList(),
+      ),
     );
   }
 }

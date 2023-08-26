@@ -1,24 +1,33 @@
 //To display the content of the bottom sheet
 
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../flutter_widgets/create_button.dart';
+import 'package:list_view/resources/global_variable.dart';
+import '../../resources/reminder.dart';
 import '../flutter_widgets/text_field_input.dart';
 
 class ShowBottomSheet extends StatefulWidget {
-  const ShowBottomSheet({
+  ShowBottomSheet({
     super.key,
     required this.scrollController,
-    required this.onAddTitle,
+    this.onAddReminder,
+    this.onUpdateReminder,
+    this.reminder,
+    this.toChange = false,
   });
   final ScrollController scrollController;
-  final Function(String title) onAddTitle;
+  Function(Reminder reminder)? onAddReminder;
+  Function(Reminder oldItem, Reminder newItem)? onUpdateReminder;
+  final Reminder? reminder;
+  final bool toChange;
   @override
   State<ShowBottomSheet> createState() => _ShowBottomSheetState();
 }
 
 class _ShowBottomSheetState extends State<ShowBottomSheet> {
-  final TextEditingController title = TextEditingController();
-  final TextEditingController description = TextEditingController();
+  TextEditingController title = TextEditingController();
+  TextEditingController description = TextEditingController();
 
   @override
   void dispose() {
@@ -27,10 +36,53 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
     description.dispose();
   }
 
+  DateTime date = DateTime.now();
+  DateTime time = DateTime.now();
+  TimeOfDay timeOfDay = TimeOfDay.now();
+
+  // void addNewReminder(Reminder reminder) {
+  //   widget.onAddReminder(reminder);
+  // }
+
   @override
   Widget build(BuildContext context) {
+    title = TextEditingController(
+        text: (widget.toChange) ? widget.reminder!.title : title.text);
+    description = TextEditingController(
+        text: (widget.toChange)
+            ? widget.reminder!.description
+            : description.text);
+
+    date = (widget.toChange) ? widget.reminder!.date : date;
+
+    String selectedDate = dateFormatter.format(date);
+    String? selectedTime;
+    if (Platform.isAndroid) selectedTime = timeOfDay.format(context);
+    if (Platform.isIOS) selectedTime = timeFormatter.format(time);
+    // void setDate(DateTime date) {
+    //   setState(() {
+    //     selectedDate = dateFormatter.format(date);
+    //     print(selectedDate);
+    //   });
+    // }
+
+    // void setTimeAndroid(TimeOfDay time) {
+    //   setState(() {
+    //     selectedTime = time.format(context);
+    //     print(selectedTime);
+    //   });
+    // }
+
+    // void setTimeiOS(DateTime time) {
+    //   setState(() {
+    //     selectedTime = timeFormatter.format(time);
+    //     print(selectedTime);
+    //   });
+    // }
+
     return Container(
-      padding: const EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(
+          top: 10, bottom: MediaQuery.of(context).viewInsets.bottom + 16),
       decoration: BoxDecoration(
         color: Colors.blue[50],
         shape: BoxShape.rectangle,
@@ -64,7 +116,8 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                 children: [
                   Container(
                     height: 200,
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         shape: BoxShape.rectangle,
@@ -88,73 +141,131 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                     ),
                   ),
                   Container(
-                    height: 200,
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    height: 250,
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                       shape: BoxShape.rectangle,
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(50),
                     ),
-                  ),
-                  Container(
-                    height: 200,
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                  Container(
-                    height: 200,
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                  Container(
-                    height: 200,
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                  Container(
-                    height: 200,
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                  Container(
-                    height: 200,
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                  Container(
-                    height: 200,
-                    margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(50),
+                    child: Column(
+                      children: [
+                        if (Platform.isIOS)
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                height: 100,
+                                width: MediaQuery.of(context).size.width - 150,
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      selectedDate,
+                                    ),
+                                    Expanded(
+                                      child: CupertinoDatePicker(
+                                        initialDateTime: date,
+                                        mode: CupertinoDatePickerMode.date,
+                                        onDateTimeChanged: (val) {
+                                          setState(() {
+                                            if (widget.toChange) {
+                                              widget.reminder!.date = val;
+                                            }
+                                            date = val;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: 50,
+                              ),
+                              SizedBox(
+                                height: 60,
+                                width: MediaQuery.of(context).size.width - 250,
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      selectedTime!,
+                                    ),
+                                    Expanded(
+                                      child: CupertinoDatePicker(
+                                        use24hFormat: true,
+                                        mode: CupertinoDatePickerMode.time,
+                                        initialDateTime: time,
+                                        onDateTimeChanged: (val) {
+                                          setState(() {
+                                            time = val;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        if (Platform.isAndroid)
+                          Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    selectedDate,
+                                    style: const TextStyle().copyWith(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700),
+                                  ),
+                                  IconButton(
+                                    onPressed: () async {
+                                      DateTime? val = await showDatePicker(
+                                        context: context,
+                                        initialDate: date,
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2100),
+                                      );
+                                      print(val.toString());
+                                      if (val == null) return;
+                                      setState(() {
+                                        print('execute');
+                                        if (widget.toChange) {
+                                          widget.reminder!.date = val;
+                                        }
+                                        date = val;
+                                        print(date.toString());
+                                      });
+                                      //setDate(date);
+                                    },
+                                    icon: const Icon(
+                                      Icons.calendar_month_outlined,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(selectedTime!),
+                                  IconButton(
+                                      onPressed: () async {
+                                        TimeOfDay? val = await showTimePicker(
+                                          context: context,
+                                          initialTime: timeOfDay,
+                                        );
+                                        if (val == null) return;
+                                        setState(() {
+                                          timeOfDay = val;
+                                        });
+                                      },
+                                      icon: const Icon(Icons.timer))
+                                ],
+                              )
+                            ],
+                          ),
+                      ],
                     ),
                   ),
                 ],
@@ -170,7 +281,9 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     TextButton(
-                      onPressed: () => Navigator.pop(context),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       style: const ButtonStyle(
                         minimumSize: MaterialStatePropertyAll(
                           Size(100, 50),
@@ -193,11 +306,39 @@ class _ShowBottomSheetState extends State<ShowBottomSheet> {
                     Container(
                       width: 20,
                     ),
-                    CreateButton(
-                      controller1: title,
-                      controller2: description,
-                      context: context,
-                      onAddItem: widget.onAddTitle,
+                    ElevatedButton(
+                      style: const ButtonStyle(
+                        minimumSize: MaterialStatePropertyAll(
+                          Size(100, 50),
+                        ),
+                        shape: MaterialStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(500),
+                            ),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Reminder item = Reminder(
+                            title: (title.text.trim().isNotEmpty)
+                                ? title.text.trim()
+                                : "NEW REMINDER",
+                            description: description.text.trim(),
+                            date: date,
+                            time: selectedTime!,
+                            timeStamp: date);
+                        if (!widget.toChange) {
+                          widget.onAddReminder!(item);
+                        } else {
+                          widget.onUpdateReminder!(widget.reminder!, item);
+                        }
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        (!widget.toChange) ? 'Create' : 'Update',
+                        style: const TextStyle(fontSize: 15),
+                      ),
                     ),
                   ],
                 ),
